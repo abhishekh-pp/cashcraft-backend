@@ -36,7 +36,7 @@ router.post("/user/signup", async (req, res) => {
   }
 });
 
-router.post("/user/login", verifyLogin, async (req, res) => {
+router.post("/user/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -51,25 +51,12 @@ router.post("/user/login", verifyLogin, async (req, res) => {
       return res.status(401).json({ error: "Login failed" });
     }
 
-    // Define your payload for JWT
-    // const payload = {
-    //   userId: user._id,
-    //   name: user.name,
-    // };
-
-    // Your secret key (replace with your actual secret key)
-    // const secretKey = process.env.JWT_SECRET;
-
-    // Sign the JWT
-    // const token = jwt.sign(payload, secretKey, {
-    //   expiresIn: "3d",
-    // });
     const token = jwt.sign(
       { _id: user._id, name: user.name },
       process.env.JWT_SECRET,
       { expiresIn: 3 * 24 * 60 * 60 }
     );
-
+    console.log(user.name);
     res.cookie("token", token, { withCredentials: true, httpOnly: true });
     res.status(200).json({
       message: "Login successful",

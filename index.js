@@ -17,7 +17,7 @@ const baseUrl = process.env.BASE_URL;
 app.use(
   cors({
     origin: [baseUrl],
-    methods: ["GET", "POST", "PATCH", "DELETE"],
+    methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
     credentials: true,
   })
 );
