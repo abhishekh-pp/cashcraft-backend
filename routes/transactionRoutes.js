@@ -1,7 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const Transaction = require("../models/transaction");
-const User = require("../models/user"); // Assuming you have a User model
+const User = require("../models/user");
 const router = express.Router();
 
 const verifyLogin = (req, res, next) => {
