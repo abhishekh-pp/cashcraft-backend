@@ -56,7 +56,6 @@ router.post("/user/login", async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: 3 * 24 * 60 * 60 }
     );
-    console.log(user.name);
     res.cookie("token", token, { withCredentials: true, httpOnly: true });
     res.status(200).json({
       message: "Login successful",
