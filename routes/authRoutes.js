@@ -4,21 +4,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const router = express.Router();
 
-const verifyLogin = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) {
-    res.status(401).send("Unauthorized access");
-  }
-  try {
-    var decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    req.user = decoded._id;
-  } catch (err) {
-    res.status(401).send("Unauthorized access");
-  }
-  next();
-};
-
 router.post("/user/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
